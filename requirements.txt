@@ -1,0 +1,48 @@
+# =============================================================================
+#  Multimodal Emotion AI v7.2-azure — requirements.txt
+#  Target: Azure App Service (Python 3.13 / TF 2.20 / Keras 3)
+# =============================================================================
+
+# ── Web framework ─────────────────────────────────────────────────────────────
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+python-multipart>=0.0.9        # required for FastAPI File/Form uploads
+
+# ── Core ML ───────────────────────────────────────────────────────────────────
+# TF 2.20 is the first release with Python 3.13 wheels.
+# Keras 3 is bundled — do NOT pin keras separately.
+tensorflow>=2.20.0
+
+# ── Audio ─────────────────────────────────────────────────────────────────────
+librosa>=0.10.2
+soundfile>=0.12.1
+audioread>=3.0.1
+
+# ── Vision / CV ───────────────────────────────────────────────────────────────
+opencv-python-headless>=4.9.0
+
+# ── ML utilities ─────────────────────────────────────────────────────────────
+scikit-learn>=1.4.0
+
+# ── TTS ───────────────────────────────────────────────────────────────────────
+gTTS>=2.5.0
+
+# ── Plotting ──────────────────────────────────────────────────────────────────
+matplotlib>=3.9.0
+seaborn>=0.13.0
+
+# ── Data ──────────────────────────────────────────────────────────────────────
+numpy>=1.26.0
+pandas>=2.2.0
+
+# ── Azure Blob Storage ────────────────────────────────────────────────────────
+# azure-storage-blob : BlobServiceClient used in ModelRegistry to download
+#                      .keras model weights from Azure Blob Storage at startup.
+# azure-identity     : optional — enables DefaultAzureCredential (Managed
+#                      Identity) as an alternative to connection strings.
+azure-storage-blob>=12.20.0
+azure-identity>=1.17.0
+
+# ── SHAP: DeepExplainer does NOT support Keras 3 (TF 2.20).
+# Kept commented; guarded with try/except in app.py if re-enabled.
+# shap>=0.45
